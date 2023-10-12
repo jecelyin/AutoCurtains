@@ -1,0 +1,102 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "/Users/jecelyin/code/workspace/GD32/F470/include",
+                "/Users/jecelyin/code/workspace/GD32/F470/src",
+                "/Users/jecelyin/code/workspace/GD32/F470/lib/usart",
+                "/Users/jecelyin/code/workspace/GD32/F470/lib/pwm",
+                "/Users/jecelyin/code/workspace/GD32/F470/lib/systick",
+                "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/cmsis/cores/gd32",
+                "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/cmsis/startup_files",
+                "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/cmsis/variants/gd32f4xx",
+                "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/variants/gd32f4xx/inc",
+                "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/variants/gd32f4xx/src",
+                "/Users/jecelyin/code/workspace/GD32/F470/lib/dma",
+                "/Users/jecelyin/code/workspace/GD32/F470/lib/led",
+                "/Users/jecelyin/code/workspace/GD32/F470/lib/timer",
+                "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/GD32F4xx_usb_library",
+                "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/GD32F4xx_usb_library/driver/Include",
+                "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/GD32F4xx_usb_library/host/core/Include",
+                "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/GD32F4xx_usb_library/device/core/Include",
+                "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/GD32F4xx_usb_library/ustd/common",
+                "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/GD32F4xx_usb_library/ustd/class/cdc",
+                "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/GD32F4xx_usb_library/ustd/class/hid",
+                "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/GD32F4xx_usb_library/ustd/class/msc",
+                "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/fat_fs/include",
+                "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/fat_fs/src",
+                "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/gd32f407r_start",
+                "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/gd32f407v_start",
+                "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/gd32f450i_eval",
+                "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/gd32f450z_eval",
+                "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/cmsis/libraries/cmsis_dsp/include",
+                "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/cmsis/libraries/cmsis_dsp",
+                "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/cmsis/libraries/cmsis_dsp_from_source/src",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "/Users/jecelyin/code/workspace/GD32/F470/include",
+                    "/Users/jecelyin/code/workspace/GD32/F470/src",
+                    "/Users/jecelyin/code/workspace/GD32/F470/lib/usart",
+                    "/Users/jecelyin/code/workspace/GD32/F470/lib/pwm",
+                    "/Users/jecelyin/code/workspace/GD32/F470/lib/systick",
+                    "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/cmsis/cores/gd32",
+                    "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/cmsis/startup_files",
+                    "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/cmsis/variants/gd32f4xx",
+                    "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/variants/gd32f4xx/inc",
+                    "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/variants/gd32f4xx/src",
+                    "/Users/jecelyin/code/workspace/GD32/F470/lib/dma",
+                    "/Users/jecelyin/code/workspace/GD32/F470/lib/led",
+                    "/Users/jecelyin/code/workspace/GD32/F470/lib/timer",
+                    "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/GD32F4xx_usb_library",
+                    "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/GD32F4xx_usb_library/driver/Include",
+                    "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/GD32F4xx_usb_library/host/core/Include",
+                    "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/GD32F4xx_usb_library/device/core/Include",
+                    "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/GD32F4xx_usb_library/ustd/common",
+                    "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/GD32F4xx_usb_library/ustd/class/cdc",
+                    "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/GD32F4xx_usb_library/ustd/class/hid",
+                    "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/GD32F4xx_usb_library/ustd/class/msc",
+                    "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/fat_fs/include",
+                    "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/fat_fs/src",
+                    "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/gd32f407r_start",
+                    "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/gd32f407v_start",
+                    "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/gd32f450i_eval",
+                    "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/spl/libraries/gd32f4xx/gd32f450z_eval",
+                    "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/cmsis/libraries/cmsis_dsp/include",
+                    "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/cmsis/libraries/cmsis_dsp",
+                    "/Users/jecelyin/.platformio/packages/framework-spl-gd32/gd32/cmsis/libraries/cmsis_dsp_from_source/src",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=60111",
+                "GD32F4",
+                "GD32F470",
+                "GD32F4xx",
+                "F_CPU=240000000L",
+                "BOARD_NAME=\"GENERICGD32F470ZG\"",
+                "GENERICGD32F470ZG",
+                "USE_STDPERIPH_DRIVER",
+                ""
+            ],
+            "compilerPath": "/Users/jecelyin/.platformio/packages/toolchain-gccarmnoneeabi/bin/arm-none-eabi-gcc",
+            "compilerArgs": [
+                "-mthumb",
+                "-mcpu=cortex-m4",
+                "-mfloat-abi=softfp",
+                "-mfpu=fpv4-sp-d16",
+                "-march=armv7e-m+fp",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}

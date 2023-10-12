@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/lib/dma/bsp_dma.c" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lib/dma/bsp_dma.h" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lib/led/bsp_led.c" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lib/led/bsp_led.h" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lib/pwm/bsp_pwm.c" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lib/pwm/bsp_pwm.h" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lib/timer/bsp_basic_timer.c" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lib/timer/bsp_basic_timer.h" charset="UTF-8" />
+    <file url="mock:///bsp_basic_timer.c" charset="GBK" />
+    <file url="mock:///bsp_dma.c" charset="GBK" />
+    <file url="mock:///bsp_pwm.c" charset="GB2312" />
+  </component>
+</project>
