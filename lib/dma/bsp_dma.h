@@ -13,5 +13,6 @@
 #define BSP_DMA_CH_IRQ_HANDLER DMA1_Channel2_IRQHandler  // DMA中断服务函数名
 
 void dma_config(void);   // 配置DMA
+void dma_init(uint32_t dma_periph, dma_channel_enum channelx, uint32_t periph_addr, uint32_t *data_addr, uint32_t data_length);
 
 #endif  /* BSP_DMA_H */

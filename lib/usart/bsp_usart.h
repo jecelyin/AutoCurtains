@@ -10,13 +10,13 @@
 
 #define BSP_USART_TX_PORT GPIOA				// 串口TX的端口
 #define BSP_USART_RX_PORT GPIOA				// 串口RX的端口
-#define BSP_USART_AF 			GPIO_AF_7   // 串口0的复用功能
+#define BSP_USART_AF 	  GPIO_AF_7   // 串口0的复用功能
 #define BSP_USART_TX_PIN  GPIO_PIN_9  // 串口TX的引脚
 #define BSP_USART_RX_PIN  GPIO_PIN_10 // 串口RX的引脚
 
-#define BSP_USART 						USART0      								// 串口0
+#define BSP_USART 				USART0      								// 串口0
 #define BSP_USART_IRQ     		USART0_IRQn 								// 串口0中断
-#define BSP_USART_IRQHandler  USART0_IRQHandler						// 串口0中断服务函数
+#define BSP_USART_IRQHandler    USART0_IRQHandler						// 串口0中断服务函数
 
 /* 串口缓冲区的数据长度 */
 #define USART_RECEIVE_LENGTH  4096
