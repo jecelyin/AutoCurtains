@@ -2,55 +2,37 @@
 #include "bsp_adc.h"
 #include "systick.h"
 
-void adc_init(uint32_t adc_periph, uint8_t adc_channel, uint32_t channel_length) {
-    /* 配置ADC时钟        */
-    adc_clock_config(ADC_ADCCK_PCLK2_DIV4);
 
-    /* 配置ADC为独立模式        */
+// adc only
+void adc_init(uint32_t adc_periph, uint8_t adc_channel) {
+    //配置ADC为独立模式
     adc_sync_mode_config(ADC_SYNC_MODE_INDEPENDENT);
 
-    /* 使能连续转换模式        */
-    adc_special_function_config(adc_periph, ADC_CONTINUOUS_MODE, ENABLE);
-
-    /* 使能扫描模式        */
+    //使能扫描模式
     adc_special_function_config(adc_periph, ADC_SCAN_MODE, ENABLE);
 
-    /* 数据右对齐        */
+    //数据右对齐
     adc_data_alignment_config(adc_periph, ADC_DATAALIGN_RIGHT);
 
-    /* ADC0设置为规则组  一共使用 LIGHT_CHANNEL_NUM 个通道                */
-    adc_channel_length_config(adc_periph, ADC_REGULAR_CHANNEL, channel_length);
-
-    /* ADC规则通道配置：ADC0的通道11的扫描顺序为0；采样时间：15个周期                */
-    /* DMA开启之后 gt_adc_val[x][0] = PC1的数据   */
-    adc_regular_channel_config(adc_periph, 0, adc_channel, ADC_SAMPLETIME_15);//PC1
-
-    /* ADC0设置为12位分辨率                */
+    //ADC0设置为12位分辨率
     adc_resolution_config(adc_periph, ADC_RESOLUTION_12B);
 
-    /* ADC外部触发禁用, 即只能使用软件触发                */
+    //ADC0设置为规则组  一共使用 1 个通道
+    adc_channel_length_config(adc_periph, ADC_REGULAR_CHANNEL, 2);
+
+    //ADC外部触发禁用, 即只能使用软件触发
     adc_external_trigger_config(adc_periph, ADC_REGULAR_CHANNEL, EXTERNAL_TRIGGER_DISABLE);
 
-    /* 使能规则组通道每转换完成一个就发送一次DMA请求                */
-    adc_dma_request_after_last_enable(adc_periph);
-
-    /* 使能DMA请求                */
-    adc_dma_mode_enable(adc_periph);
-
-    /* 使能DMA                */
+    //ADC0使能
     adc_enable(adc_periph);
 
-    /* 等待ADC稳定                */
-    delay_1ms(1);
-
-    /* 开启ADC自校准                */
+    //开启ADC自校准
     adc_calibration_enable(adc_periph);
+
+    //配置ADC时钟
+    adc_clock_config(ADC_ADCCK_PCLK2_DIV4);
 }
 
-void adc_start(uint32_t adc_periph) {
-    /* 开启软件触发ADC转换                */
-    adc_software_trigger_enable(adc_periph, ADC_REGULAR_CHANNEL);
-}
 
 void adc_config(void) {
     //使能引脚时钟

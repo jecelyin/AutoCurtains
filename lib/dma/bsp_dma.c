@@ -10,6 +10,7 @@
 #include "bsp_dma.h"
 #include "bsp_usart.h"
 
+extern uint16_t gt_adc_val[ 30 ][ 1 ];
 /************************************************
 函数名称 ： dma_config
 功    能 ： DMA配置
@@ -28,7 +29,7 @@ void dma_init(uint32_t dma_periph, dma_channel_enum channelx, uint32_t periph_ad
     /* DMA初始化配置         */
     dma_single_data_parameter.periph_addr = (uint32_t)(&ADC_RDATA(periph_addr));         //设置DMA传输的外设地址为ADC0基地址
     dma_single_data_parameter.periph_inc = DMA_PERIPH_INCREASE_DISABLE;                         //关闭外设地址自增
-    dma_single_data_parameter.memory0_addr = *data_addr;                         //设置DMA传输的内存地址为 gt_adc_val数组
+    dma_single_data_parameter.memory0_addr = (uint32_t)(gt_adc_val);                         //设置DMA传输的内存地址为 gt_adc_val数组
     dma_single_data_parameter.memory_inc = DMA_MEMORY_INCREASE_ENABLE;                         //开启内存地址自增（因为不止一个通道）
     dma_single_data_parameter.periph_memory_width = DMA_PERIPH_WIDTH_16BIT;             //传输的数据位 为 16位
     dma_single_data_parameter.direction = DMA_PERIPH_TO_MEMORY;                                         //DMA传输方向为 外设往内存

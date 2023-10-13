@@ -19,7 +19,7 @@
 
 #include "gd32f4xx.h"
 
-void adc_init(uint32_t adc_periph, uint8_t adc_channel, uint32_t channel_length);
+void adc_init(uint32_t adc_periph, uint8_t adc_channel);
 void adc_start(uint32_t adc_periph);
 void adc_config(void);
 unsigned int Get_ADC_Value(uint8_t  ADC_CHANNEL_x);

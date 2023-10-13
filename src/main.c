@@ -22,7 +22,6 @@ int main(void) {
     dma_config(); // DMA配置
     light_init();
 
-    uint16_t value = 0;
     while (1) {
         /* 等待数据传输完成 */
         if (g_recv_complete_flag)                                        // 数据接收完成
@@ -36,9 +35,9 @@ int main(void) {
         // 呼吸灯
         pwm_breathing_lamp();
 
-        printf("ADC-%d\r\n", get_light_adc_value(0) );
+        printf("ADC-%d\r\n", get_light_adc_value(4) );
         printf("light-%d%%\r\n", get_light_percentage_value() );
-        delay_1ms(1000);
+        delay_1ms(300);
     }
 }
 

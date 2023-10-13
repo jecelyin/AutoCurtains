@@ -11,30 +11,30 @@
 //    Alternate: TIMER9_CH0, SPI4_NSS, UART6_RX, EXMC_NIORD, EVENTOUT
 //    Additional: ADC2_IN4
 //#define RCU_ILLUME_GPIO_AO     RCU_GPIOC
-#define RCU_LIGHT_GPIO_PORT     RCU_GPIOF
+#define LIGHT_RCU_GPIO     RCU_GPIOF
 
-#define RCU_LIGHT_ADC      RCU_ADC0
+#define LIGHT_RCU_ADC      RCU_ADC2
 #define RCU_LIGHT_DMA      RCU_DMA1
 
 #define PORT_DMA            DMA1
-#define CHANNEL_DMA         DMA_CH0
+#define CHANNEL_DMA         DMA_CH1
 
-#define PORT_ADC            ADC2
-#define CHANNEL_ADC         ADC_CHANNEL_4
+#define LIGHT_ADC_CH            ADC2
 
 //#define PORT_ILLUME_AO      GPIOC
 //#define GPIO_ILLUME_AO        GPIO_PIN_1
 
-#define PORT_LIGHT_PIN      GPIOF
-#define GPIO_LIGHT_PIN      GPIO_PIN_6
+#define LIGHT_GPIO      GPIOF
+#define LIGHT_PIN      GPIO_PIN_6
 
-#define GET_LIGHT_IN   gpio_input_bit_get(PORT_LIGHT_PIN, GPIO_LIGHT_PIN)
+#define GET_LIGHT_IN   gpio_input_bit_get(LIGHT_GPIO, LIGHT_PIN)
 
 //采样次数
 #define LIGHT_SAMPLES         30
 //采样通道数
 #define LIGHT_CHANNEL_NUM     1
-
+//所在通道
+#define LIGHT_ADC_CHANNEL    ADC_CHANNEL_4
 //DMA缓冲区
 uint16_t gt_adc_val[ LIGHT_SAMPLES ][ LIGHT_CHANNEL_NUM ];
 
@@ -50,25 +50,23 @@ uint16_t gt_adc_val[ LIGHT_SAMPLES ][ LIGHT_CHANNEL_NUM ];
 ******************************************************************/
 void light_init(void)
 {
-
     /* 使能引脚时钟 */
-//    rcu_periph_clock_enable(RCU_ILLUME_GPIO_AO);
-    rcu_periph_clock_enable(RCU_LIGHT_GPIO_PORT);
+    rcu_periph_clock_enable(LIGHT_RCU_GPIO);
 
     /* 使能ADC时钟 */
-    rcu_periph_clock_enable(RCU_LIGHT_ADC);
+    rcu_periph_clock_enable(LIGHT_RCU_ADC);
 
     /* 使能DMA时钟 */
-    rcu_periph_clock_enable(RCU_LIGHT_DMA);
+//    rcu_periph_clock_enable(RCU_LIGHT_DMA);
 
     /* 配置PC1(AO)为浮空模拟输入模式        */
-//    gpio_mode_set(PORT_LIGHT_PIN, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, PORT_LIGHT_PIN);
-    adc_init(PORT_ADC, CHANNEL_ADC, LIGHT_CHANNEL_NUM);
+    gpio_mode_set(LIGHT_GPIO, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, LIGHT_PIN);
+    adc_init(LIGHT_ADC_CH, LIGHT_ADC_CHANNEL);
 // LIGHT_SAMPLES * LIGHT_CHANNEL_NUM
-    dma_init(PORT_DMA, CHANNEL_DMA, PORT_ADC, (uint32_t*)&gt_adc_val, LIGHT_SAMPLES * LIGHT_CHANNEL_NUM);
-    adc_start(PORT_ADC);
-}
+//    dma_init(PORT_DMA, CHANNEL_DMA, LIGHT_ADC_CH, &gt_adc_val, LIGHT_SAMPLES * LIGHT_CHANNEL_NUM);
+//    adc_start(LIGHT_ADC_CH);
 
+}
 
 /******************************************************************
  * 函 数 名 称：get_light_adc_value
@@ -80,19 +78,34 @@ void light_init(void)
 ******************************************************************/
 unsigned int get_light_adc_value(char CHx)
 {
-    unsigned char i = 0;
-    unsigned int AdcValue = 0;
-
-    /* 因为采集 LIGHT_SAMPLES 次，故循环 LIGHT_SAMPLES 次 */
-    for(i=0; i < LIGHT_SAMPLES; i++)
+//    unsigned char i = 0;
+//    unsigned int AdcValue = 0;
+//
+//    /* 因为采集 LIGHT_SAMPLES 次，故循环 LIGHT_SAMPLES 次 */
+//    for(i=0; i < LIGHT_SAMPLES; i++)
+//    {
+//        /*    累加    */
+//        AdcValue+=gt_adc_val[i][CHx];
+//    }
+//    /* 求平均值 */
+//    AdcValue= AdcValue / LIGHT_SAMPLES;
+//
+//    return AdcValue;
+// adc only
+    unsigned int adc_value = 0;
+    //设置采集通道
+    adc_regular_channel_config(LIGHT_ADC_CH, 0, LIGHT_ADC_CHANNEL, ADC_SAMPLETIME_15);
+    //开始软件转换
+    adc_software_trigger_enable(LIGHT_ADC_CH, ADC_REGULAR_CHANNEL);
+    //等待 ADC 采样完成
+    while (adc_flag_get(LIGHT_ADC_CH, ADC_FLAG_EOC) == RESET )
     {
-        /*    累加    */
-        AdcValue+=gt_adc_val[i][CHx];
+        ;
     }
-    /* 求平均值 */
-    AdcValue= AdcValue / LIGHT_SAMPLES;
-
-    return AdcValue;
+    //读取采样值
+    adc_value = adc_regular_data_read(LIGHT_ADC_CH);
+    //返回采样值
+    return adc_value;
 }
 
 /******************************************************************
@@ -116,21 +129,4 @@ unsigned int get_light_percentage_value(void)
     //百分比 = （ 当前值 / 最大值 ）* 100
     Percentage_value = ( 1 - ( (float)adc_new / adc_max ) ) * 100;
     return Percentage_value;
-}
-
-/******************************************************************
- * 函 数 名 称：get_light_input_state
- * 函 数 说 明：读取DO引脚的电平状态
- * 函 数 形 参：无
- * 函 数 返 回：1=检测过亮   0=检测过暗
- * 作       者：LC
- * 备       注：无
-******************************************************************/
-char get_light_input_state(void)
-{
-    if(GET_LIGHT_IN == 1 )
-    {
-        return 1;
-    }
-    return 0;
 }

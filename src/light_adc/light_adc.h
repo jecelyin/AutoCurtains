@@ -10,6 +10,5 @@
 void light_init(void);
 unsigned int get_light_adc_value(char CHx);
 unsigned int get_light_percentage_value(void);
-char get_light_input_state(void);
 
 #endif //F470_LIGHT_ADC_H
