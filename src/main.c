@@ -35,7 +35,7 @@ int main(void) {
         // 呼吸灯
         pwm_breathing_lamp();
 
-        printf("ADC-%d\r\n", get_light_adc_value(4) );
+        printf("ADC-%d\r\n", get_light_adc_value() );
         printf("light-%d%%\r\n", get_light_percentage_value() );
         delay_1ms(300);
     }

@@ -76,36 +76,9 @@ void light_init(void)
  * 作       者：LC
  * 备       注：返回值最低0  最高4095
 ******************************************************************/
-unsigned int get_light_adc_value(char CHx)
+uint16_t get_light_adc_value()
 {
-//    unsigned char i = 0;
-//    unsigned int AdcValue = 0;
-//
-//    /* 因为采集 LIGHT_SAMPLES 次，故循环 LIGHT_SAMPLES 次 */
-//    for(i=0; i < LIGHT_SAMPLES; i++)
-//    {
-//        /*    累加    */
-//        AdcValue+=gt_adc_val[i][CHx];
-//    }
-//    /* 求平均值 */
-//    AdcValue= AdcValue / LIGHT_SAMPLES;
-//
-//    return AdcValue;
-// adc only
-    unsigned int adc_value = 0;
-    //设置采集通道
-    adc_regular_channel_config(LIGHT_ADC_CH, 0, LIGHT_ADC_CHANNEL, ADC_SAMPLETIME_15);
-    //开始软件转换
-    adc_software_trigger_enable(LIGHT_ADC_CH, ADC_REGULAR_CHANNEL);
-    //等待 ADC 采样完成
-    while (adc_flag_get(LIGHT_ADC_CH, ADC_FLAG_EOC) == RESET )
-    {
-        ;
-    }
-    //读取采样值
-    adc_value = adc_regular_data_read(LIGHT_ADC_CH);
-    //返回采样值
-    return adc_value;
+    return adc_get_value(LIGHT_ADC_CH, LIGHT_ADC_CHANNEL);
 }
 
 /******************************************************************
@@ -116,7 +89,7 @@ unsigned int get_light_adc_value(char CHx)
  * 作       者：LC
  * 备       注：最亮100  最暗0
 ******************************************************************/
-unsigned int get_light_percentage_value(void)
+uint16_t get_light_percentage_value(void)
 {
     //GD32F470和GD32F450的ADC精度都是12位
     //2的12次方 = 4096
@@ -125,7 +98,7 @@ unsigned int get_light_percentage_value(void)
     int adc_new = 0;
     int Percentage_value = 0;
 
-    adc_new = get_light_adc_value(0);
+    adc_new = get_light_adc_value();
     //百分比 = （ 当前值 / 最大值 ）* 100
     Percentage_value = ( 1 - ( (float)adc_new / adc_max ) ) * 100;
     return Percentage_value;
