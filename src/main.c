@@ -11,6 +11,7 @@
 #include "string.h"
 #include "light_adc/light_adc.h"
 #include "rain_adc/rain_adc.h"
+#include "ir/ir_receive.h"
 
 
 int main(void) {
@@ -22,6 +23,7 @@ int main(void) {
     dma_config(); // DMA配置
     light_init();
     rain_init();
+    ir_rx_init();
 
     while (1) {
         /* 等待数据传输完成 */
@@ -36,8 +38,69 @@ int main(void) {
         // 呼吸灯
         pwm_breathing_lamp();
 
+        //如果按下遥控的【1】键
+        uint8_t command = get_infrared_command();
+        if (command > 0) {
+            clear_infrared_command();
+            switch (command) {
+                case 0xA2:
+                    printf("Press the 1 button \r\n");
+                    break;
+                case 0x62:
+                    printf("Press the 2 button \r\n");
+                    break;
+                case 0xe2:
+                    printf("Press the 3 button \r\n");
+                    break;
+                case 0x22:
+                    printf("Press the 4 button \r\n");
+                    break;
+                case 0x2:
+                    printf("Press the 5 button \r\n");
+                    break;
+                case 0xc2:
+                    printf("Press the 6 button \r\n");
+                    break;
+                case 0xe0:
+                    printf("Press the 7 button \r\n");
+                    break;
+                case 0xa8:
+                    printf("Press the 8 button \r\n");
+                    break;
+                case 0x90:
+                    printf("Press the 9 button \r\n");
+                    break;
+                case 0x68:
+                    printf("Press the * button \r\n");
+                    break;
+                case 0x98:
+                    printf("Press the 0 button \r\n");
+                    break;
+                case 0xb0:
+                    printf("Press the # button \r\n");
+                    break;
+                case 0x18:
+                    printf("Press the up button \r\n");
+                    break;
+                case 0x10:
+                    printf("Press the left button \r\n");
+                    break;
+                case 0x38:
+                    printf("Press the ok button \r\n");
+                    break;
+                case 0x5a:
+                    printf("Press the right button \r\n");
+                    break;
+                case 0x4a:
+                    printf("Press the down button \r\n");
+                    break;
+                default:
+                    printf("Unknown IR command: %x \r\n", command);
+            }
+        }
+
 //        printf("light:%d,%d%%\r\n", get_light_adc_value(), get_light_percentage_value() );
-        printf("rain:%d,%d%%\r\n", get_rain_adc_value(), get_rain_percentage_value() );
+//        printf("rain:%d,%d%%\r\n", get_rain_adc_value(), get_rain_percentage_value() );
         delay_1ms(300);
     }
 }
