@@ -12,33 +12,13 @@
 //    Additional: ADC2_IN4
 //#define RCU_ILLUME_GPIO_AO     RCU_GPIOC
 #define LIGHT_RCU_GPIO     RCU_GPIOF
-
 #define LIGHT_RCU_ADC      RCU_ADC2
-#define RCU_LIGHT_DMA      RCU_DMA1
-
-#define PORT_DMA            DMA1
-#define CHANNEL_DMA         DMA_CH1
-
 #define LIGHT_ADC_CH            ADC2
-
-//#define PORT_ILLUME_AO      GPIOC
-//#define GPIO_ILLUME_AO        GPIO_PIN_1
 
 #define LIGHT_GPIO      GPIOF
 #define LIGHT_PIN      GPIO_PIN_6
-
-#define GET_LIGHT_IN   gpio_input_bit_get(LIGHT_GPIO, LIGHT_PIN)
-
-//采样次数
-#define LIGHT_SAMPLES         30
-//采样通道数
-#define LIGHT_CHANNEL_NUM     1
 //所在通道
 #define LIGHT_ADC_CHANNEL    ADC_CHANNEL_4
-//DMA缓冲区
-uint16_t gt_adc_val[ LIGHT_SAMPLES ][ LIGHT_CHANNEL_NUM ];
-
-
 
 /******************************************************************
  * 函 数 名 称：light_init
