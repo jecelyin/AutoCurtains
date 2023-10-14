@@ -9,8 +9,8 @@
 #include "stdlib.h"
 #include <stdio.h>
 #include "string.h"
-#include "../lib/adc/bsp_adc.h"
 #include "light_adc/light_adc.h"
+#include "rain_adc/rain_adc.h"
 
 
 int main(void) {
@@ -21,6 +21,7 @@ int main(void) {
     pwm_config(200, 10000); // PWM初始化
     dma_config(); // DMA配置
     light_init();
+    rain_init();
 
     while (1) {
         /* 等待数据传输完成 */
@@ -35,8 +36,8 @@ int main(void) {
         // 呼吸灯
         pwm_breathing_lamp();
 
-        printf("ADC-%d\r\n", get_light_adc_value() );
-        printf("light-%d%%\r\n", get_light_percentage_value() );
+//        printf("light:%d,%d%%\r\n", get_light_adc_value(), get_light_percentage_value() );
+        printf("rain:%d,%d%%\r\n", get_rain_adc_value(), get_rain_percentage_value() );
         delay_1ms(300);
     }
 }
