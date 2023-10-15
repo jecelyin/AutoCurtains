@@ -14,7 +14,7 @@
 #include "ir/ir_receive.h"
 #include "../lib/motor/bsp_stepper_motor.h"
 #include "../lib/voice/asr.h"
-#include "warn/rcwl0516.h"
+#include "human/rcwl0516.h"
 
 uint8_t auto_mode = 1;
 void detect_ir_command() {
