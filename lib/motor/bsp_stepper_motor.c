@@ -16,7 +16,11 @@ int step_count = 0;
 // 最大步数，每走一拍表示一步
 // 实测从左边尽头到右边尽头的步数是600步
 // 请根据自己设备的最大步数调整此参数
-#define MAX_STEPS 90
+#define MAX_STEPS 550
+
+uint8_t is_motor_idle() {
+    return motor_cw_flag == 0 && motor_ccw_flag == 0;
+}
 
 void stepper_motor_timer_config(void)
 {

@@ -40,4 +40,6 @@ void limit_judgment(int num);
 void curtain_reset(void);
 void open_curtain(void);
 void close_curtain(void);
+uint8_t is_motor_idle();
+
 #endif
