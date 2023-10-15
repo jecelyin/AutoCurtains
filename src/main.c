@@ -9,9 +9,11 @@
 #include "stdlib.h"
 #include <stdio.h>
 #include "string.h"
-#include "light_adc/light_adc.h"
-#include "rain_adc/rain_adc.h"
+#include "light/light_adc.h"
+#include "rain/rain_adc.h"
 #include "ir/ir_receive.h"
+#include "../lib/motor/bsp_stepper_motor.h"
+#include "../lib/voice/asr.h"
 
 
 int main(void) {
@@ -24,8 +26,22 @@ int main(void) {
     light_init();
     rain_init();
     ir_rx_init();
+    // 语音识别模块引脚初始化
+    asr_init();
 
     while (1) {
+        switch (asr_check_command()) {
+            case ASR_OPEN:
+                printf("asr open\r\n");
+                asr_clean_command();
+                break;
+            case ASR_CLOSE:
+                printf("asr close\r\n");
+                asr_clean_command();
+                break;
+            default:
+                break;
+        }
         /* 等待数据传输完成 */
         if (g_recv_complete_flag)                                        // 数据接收完成
         {
@@ -99,11 +115,38 @@ int main(void) {
             }
         }
 
+//        unsigned char rx_data = voice_anakysis_data();
+//        //接收到语音命令
+//        switch (rx_data)//根据语音命令确定对应的动作
+//        {
+//            case 0x01://开窗帘命令
+//                open_curtain();
+//                //设置非自动模式
+//                set_mode_switch_flag(NO_AUTO_MODE);
+//                break;
+//
+//            case 0x02://关窗帘命令
+//                close_curtain();
+//                //设置非自动模式
+//                set_mode_switch_flag(NO_AUTO_MODE);
+//                break;
+//
+//            case 0x03://自动模式命令
+//                set_mode_switch_flag(AUTO_MODE);
+//                break;
+//
+//            case 0x04://手动模式命令
+//                set_mode_switch_flag(NO_AUTO_MODE);
+//                break;
+//        }
+//        //步进电机限位判断
+//        limit_judgment(get_step_count());
 //        printf("light:%d,%d%%\r\n", get_light_adc_value(), get_light_percentage_value() );
 //        printf("rain:%d,%d%%\r\n", get_rain_adc_value(), get_rain_percentage_value() );
         delay_1ms(300);
     }
 }
+
 
 void NMI_Handler(void) {}
 
