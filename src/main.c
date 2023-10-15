@@ -28,8 +28,16 @@ int main(void) {
     ir_rx_init();
     // 语音识别模块引脚初始化
     asr_init();
+    motor_init(2000,200);
 
+    int i = 0;
     while (1) {
+        i += 100;
+        if( i > 2000 ) i = 0;
+
+        ao_control(0,i);//A端电机反转
+        bo_control(0,i);//B端电机正转
+        delay_1ms(50);
         switch (asr_check_command()) {
             case ASR_OPEN:
                 printf("asr open\r\n");
@@ -143,7 +151,6 @@ int main(void) {
 //        limit_judgment(get_step_count());
 //        printf("light:%d,%d%%\r\n", get_light_adc_value(), get_light_percentage_value() );
 //        printf("rain:%d,%d%%\r\n", get_rain_adc_value(), get_rain_percentage_value() );
-        delay_1ms(300);
     }
 }
 
