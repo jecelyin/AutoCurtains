@@ -1,52 +1,43 @@
-#ifndef _BSP_DRV8833_H
-#define _BSP_DRV8833_H
 
-
+#ifndef _BSP_STEPPER_MOTOR_H_
+#define _BSP_STEPPER_MOTOR_H_
+ 
 #include "gd32f4xx.h"
-#include "systick.h"
-
-#define RCU_AIN1                 RCU_GPIOA
-#define PORT_AIN1                GPIOA
-#define GPIO_AIN1                GPIO_PIN_2
-#define AF_AIN1                  GPIO_AF_1
-#define RCU_AIN1_TIMER           RCU_TIMER1
-#define BSP_AIN1_TIMER           TIMER1         // 定时器
-#define BSP_AIN1_CHANNEL         TIMER_CH_2     // 定时器通道
-
-#define RCU_AIN2                 RCU_GPIOA
-#define PORT_AIN2                GPIOA
-#define GPIO_AIN2                GPIO_PIN_3
-#define AF_AIN2                  GPIO_AF_1
-#define RCU_AIN2_TIMER           RCU_TIMER1
-#define BSP_AIN2_TIMER           TIMER1         // 定时器
-#define BSP_AIN2_CHANNEL         TIMER_CH_3     // 定时器通道
-
-#define RCU_BIN1                 RCU_GPIOB
-#define PORT_BIN1                GPIOB
-#define GPIO_BIN1                GPIO_PIN_11
-#define AF_BIN1                  GPIO_AF_1
-#define RCU_BIN1_TIMER           RCU_TIMER1
-#define BSP_BIN1_TIMER           TIMER1         // 定时器
-#define BSP_BIN1_CHANNEL         TIMER_CH_3     // 定时器通道
-
-#define RCU_BIN2                 RCU_GPIOB
-#define PORT_BIN2                GPIOB
-#define GPIO_BIN2                GPIO_PIN_10
-#define AF_BIN2                  GPIO_AF_1
-#define RCU_BIN2_TIMER           RCU_TIMER1
-#define BSP_BIN2_TIMER           TIMER1         // 定时器
-#define BSP_BIN2_CHANNEL         TIMER_CH_2     // 定时器通道
 
 
-#define AIN1_OUT(X)  gpio_bit_write(PORT_AIN1, GPIO_AIN1, X?SET:RESET)
-#define AIN2_OUT(X)  gpio_bit_write(PORT_AIN2, GPIO_AIN2, X?SET:RESET)
+#define AP_RCU      RCU_GPIOA
+#define AP_PORT     GPIOA
+#define AP_PIN      GPIO_PIN_2
 
-#define BIN1_OUT(X)  gpio_bit_write(PORT_BIN1, GPIO_BIN1, X?SET:RESET)
-#define BIN2_OUT(X)  gpio_bit_write(PORT_BIN2, GPIO_BIN2, X?SET:RESET)
+#define AM_RCU      RCU_GPIOA
+#define AM_PORT     GPIOA
+#define AM_PIN      GPIO_PIN_3
+
+#define BP_RCU      RCU_GPIOB
+#define BP_PORT     GPIOB
+#define BP_PIN      GPIO_PIN_11
+
+#define BM_RCU      RCU_GPIOB
+#define BM_PORT     GPIOB
+#define BM_PIN      GPIO_PIN_10
+
+#define AP(X)   gpio_bit_write(AP_PORT, AP_PIN, X?SET:RESET)//A+    
+#define AM(X)   gpio_bit_write(AM_PORT, AM_PIN, X?SET:RESET)//A-      
+#define BP(X)   gpio_bit_write(BP_PORT, BP_PIN, X?SET:RESET)//B+  
+#define BM(X)   gpio_bit_write(BM_PORT, BM_PIN, X?SET:RESET)//B-   
 
 
-void motor_init(uint16_t pre, uint16_t per);
-void ao_control(uint8_t dir, uint32_t speed);
-void bo_control(uint8_t dir, uint32_t speed);
-#endif  /* BSP_DRV8833_H */
+extern uint8_t motor_cw_flag;
+extern uint8_t motor_ccw_flag;
 
+
+void stepper_motor_config(void);
+void stepper_motor_timer_config(void);
+int get_step_count(void);
+void set_step_count(int num);
+void motor_stop( void );
+void limit_judgment(int num);
+void curtain_reset(void);
+void open_curtain(void);
+void close_curtain(void);
+#endif
