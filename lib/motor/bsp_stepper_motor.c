@@ -10,13 +10,14 @@ uint8_t phaseccw[8] = {0x09, 0x01, 0x03, 0x02, 0x06, 0x04, 0x0c, 0x08};
 uint8_t motor_cw_flag = 0;
 uint8_t motor_ccw_flag = 0;
 
-// 当前步数
-int step_count = 0;
 
 // 最大步数，每走一拍表示一步
 // 实测从左边尽头到右边尽头的步数是600步
 // 请根据自己设备的最大步数调整此参数
 #define MAX_STEPS 550
+
+// 当前步数
+int step_count = MAX_STEPS;
 
 uint8_t is_motor_idle() {
     return motor_cw_flag == 0 && motor_ccw_flag == 0;

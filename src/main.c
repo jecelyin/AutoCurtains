@@ -140,6 +140,7 @@ int main(void) {
 //    // 步进电机复位
 //    curtain_reset();
     human_detector_init();
+    uint8_t is_first = 1;
 
     while (1) {
         asr_detect();
@@ -162,6 +163,10 @@ int main(void) {
         // 呼吸灯
         pwm_breathing_lamp();
 
+        if (is_first) {
+            is_first = 0;
+            open_curtain();
+        }
         //步进电机限位判断
         limit_judgment(get_step_count());
 
