@@ -28,100 +28,101 @@ int main(void) {
     ir_rx_init();
     // 语音识别模块引脚初始化
     asr_init();
-    motor_init(2000,200);
+    motor_init(5000,500);
 
     int i = 0;
+
     while (1) {
         i += 100;
-        if( i > 2000 ) i = 0;
-
+        if( i >= 8000 ) i = 0;
         ao_control(0,i);//A端电机反转
-        bo_control(0,i);//B端电机正转
-        delay_1ms(50);
-        switch (asr_check_command()) {
-            case ASR_OPEN:
-                printf("asr open\r\n");
-                asr_clean_command();
-                break;
-            case ASR_CLOSE:
-                printf("asr close\r\n");
-                asr_clean_command();
-                break;
-            default:
-                break;
-        }
-        /* 等待数据传输完成 */
-        if (g_recv_complete_flag)                                        // 数据接收完成
-        {
-            g_recv_complete_flag = 0;                   // 等待下次接收
-            printf("g_recv_length:%d \n", g_recv_length);  // 打印接收的数据长度
-            printf("g_recv_buff:%s\n", g_recv_buff);        // 打印接收的数据
-            memset(g_recv_buff, 0, g_recv_length);                // 清空数组
-            g_recv_length = 0;                                                    // 清空长度
-        }
-        // 呼吸灯
-        pwm_breathing_lamp();
+        bo_control(1,i);//B端电机正转
 
-        //如果按下遥控的【1】键
-        uint8_t command = get_infrared_command();
-        if (command > 0) {
-            clear_infrared_command();
-            switch (command) {
-                case 0xA2:
-                    printf("Press the 1 button \r\n");
-                    break;
-                case 0x62:
-                    printf("Press the 2 button \r\n");
-                    break;
-                case 0xe2:
-                    printf("Press the 3 button \r\n");
-                    break;
-                case 0x22:
-                    printf("Press the 4 button \r\n");
-                    break;
-                case 0x2:
-                    printf("Press the 5 button \r\n");
-                    break;
-                case 0xc2:
-                    printf("Press the 6 button \r\n");
-                    break;
-                case 0xe0:
-                    printf("Press the 7 button \r\n");
-                    break;
-                case 0xa8:
-                    printf("Press the 8 button \r\n");
-                    break;
-                case 0x90:
-                    printf("Press the 9 button \r\n");
-                    break;
-                case 0x68:
-                    printf("Press the * button \r\n");
-                    break;
-                case 0x98:
-                    printf("Press the 0 button \r\n");
-                    break;
-                case 0xb0:
-                    printf("Press the # button \r\n");
-                    break;
-                case 0x18:
-                    printf("Press the up button \r\n");
-                    break;
-                case 0x10:
-                    printf("Press the left button \r\n");
-                    break;
-                case 0x38:
-                    printf("Press the ok button \r\n");
-                    break;
-                case 0x5a:
-                    printf("Press the right button \r\n");
-                    break;
-                case 0x4a:
-                    printf("Press the down button \r\n");
-                    break;
-                default:
-                    printf("Unknown IR command: %x \r\n", command);
-            }
-        }
+        delay_1ms(50);
+//        switch (asr_check_command()) {
+//            case ASR_OPEN:
+//                printf("asr open\r\n");
+//                asr_clean_command();
+//                break;
+//            case ASR_CLOSE:
+//                printf("asr close\r\n");
+//                asr_clean_command();
+//                break;
+//            default:
+//                break;
+//        }
+//        /* 等待数据传输完成 */
+//        if (g_recv_complete_flag)                                        // 数据接收完成
+//        {
+//            g_recv_complete_flag = 0;                   // 等待下次接收
+//            printf("g_recv_length:%d \n", g_recv_length);  // 打印接收的数据长度
+//            printf("g_recv_buff:%s\n", g_recv_buff);        // 打印接收的数据
+//            memset(g_recv_buff, 0, g_recv_length);                // 清空数组
+//            g_recv_length = 0;                                                    // 清空长度
+//        }
+//        // 呼吸灯
+//        pwm_breathing_lamp();
+//
+//        //如果按下遥控的【1】键
+//        uint8_t command = get_infrared_command();
+//        if (command > 0) {
+//            clear_infrared_command();
+//            switch (command) {
+//                case 0xA2:
+//                    printf("Press the 1 button \r\n");
+//                    break;
+//                case 0x62:
+//                    printf("Press the 2 button \r\n");
+//                    break;
+//                case 0xe2:
+//                    printf("Press the 3 button \r\n");
+//                    break;
+//                case 0x22:
+//                    printf("Press the 4 button \r\n");
+//                    break;
+//                case 0x2:
+//                    printf("Press the 5 button \r\n");
+//                    break;
+//                case 0xc2:
+//                    printf("Press the 6 button \r\n");
+//                    break;
+//                case 0xe0:
+//                    printf("Press the 7 button \r\n");
+//                    break;
+//                case 0xa8:
+//                    printf("Press the 8 button \r\n");
+//                    break;
+//                case 0x90:
+//                    printf("Press the 9 button \r\n");
+//                    break;
+//                case 0x68:
+//                    printf("Press the * button \r\n");
+//                    break;
+//                case 0x98:
+//                    printf("Press the 0 button \r\n");
+//                    break;
+//                case 0xb0:
+//                    printf("Press the # button \r\n");
+//                    break;
+//                case 0x18:
+//                    printf("Press the up button \r\n");
+//                    break;
+//                case 0x10:
+//                    printf("Press the left button \r\n");
+//                    break;
+//                case 0x38:
+//                    printf("Press the ok button \r\n");
+//                    break;
+//                case 0x5a:
+//                    printf("Press the right button \r\n");
+//                    break;
+//                case 0x4a:
+//                    printf("Press the down button \r\n");
+//                    break;
+//                default:
+//                    printf("Unknown IR command: %x \r\n", command);
+//            }
+//        }
 
 //        unsigned char rx_data = voice_anakysis_data();
 //        //接收到语音命令

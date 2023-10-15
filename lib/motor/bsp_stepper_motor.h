@@ -16,9 +16,9 @@
 #define RCU_AIN2                 RCU_GPIOA
 #define PORT_AIN2                GPIOA
 #define GPIO_AIN2                GPIO_PIN_3
-#define AF_AIN2                  GPIO_AF_2
-#define RCU_AIN2_TIMER           RCU_TIMER2
-#define BSP_AIN2_TIMER           TIMER4         // 定时器
+#define AF_AIN2                  GPIO_AF_1
+#define RCU_AIN2_TIMER           RCU_TIMER1
+#define BSP_AIN2_TIMER           TIMER1         // 定时器
 #define BSP_AIN2_CHANNEL         TIMER_CH_3     // 定时器通道
 
 #define RCU_BIN1                 RCU_GPIOB
